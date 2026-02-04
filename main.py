@@ -29,11 +29,13 @@ async def query_travel_agent(query:QueryRequest):
         react_app=graph()
         #react_app = graph.build_graph()
 
-        png_graph = react_app.get_graph().draw_mermaid_png()
-        with open("my_graph.png", "wb") as f:
-            f.write(png_graph)
-
-        print(f"Graph saved as 'my_graph.png' in {os.getcwd()}")
+        try:
+            png_graph = react_app.get_graph().draw_mermaid_png()
+            with open("my_graph.png", "wb") as f:
+                f.write(png_graph)
+            print(f"Graph saved as 'my_graph.png' in {os.getcwd()}")
+        except Exception as e:
+            print(f"Warning: Could not generate graph: {e}")
         # Assuming request is a pydantic object like: {"question": "your text"}
         messages={"messages": [query.question]}
         output = react_app.invoke(messages)
