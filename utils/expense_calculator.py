@@ -14,17 +14,14 @@ class Calculator:
         return float(a) * float(b)
     
     @staticmethod
-    def calculate_total(*x: float) -> float:
+    def calculate_total(*args) -> float:
         """
-        Calculate sum of the given list of numbers
-
-        Args:
-            x (list): List of floating numbers
-
-        Returns:
-            float: The sum of numbers in the list x
+        Calculate sum of the given list of numbers.
+        Handles both *args and a single list argument.
         """
-        return sum(x)
+        if len(args) == 1 and isinstance(args[0], (list, tuple)):
+            return sum(float(item) for item in args[0])
+        return sum(float(item) for item in args)
     
     @staticmethod
     def calculate_daily_budget(total: float, days: int) -> float:
