@@ -1,15 +1,29 @@
 @echo off
+setlocal enabledelayedexpansion
 echo ========================================================
-echo        Agentic Trip Planner - Deployment Script
+echo        Agentic Trip Planner - Deployment Script (v2)
 echo ========================================================
-echo.
-echo This script will configure Git and push all your files to Hugging Face.
 echo.
 
 :: Initialize Git if not already done
 if not exist .git (
     echo Initializing Git repository...
     git init
+)
+
+:: Set dummy git config if not set (needed for commit)
+git config user.email >nul 2>&1
+if %errorlevel% neq 0 (
+    echo Setting temporary Git identity...
+    git config user.email "deploy@example.com"
+    git config user.name "Deployment Agent"
+)
+
+:: Ensure we are on a branch called 'main'
+echo Configuring branch...
+git checkout -b main 2>nul
+if %errorlevel% neq 0 (
+    git branch -m main 2>nul
 )
 
 :: Add all files
@@ -35,8 +49,18 @@ echo verify Username: Rahii123
 echo verify Password: [YOUR HUGGING FACE ACCESS TOKEN]
 echo ========================================================
 echo.
-git push --force huggingface master:main
+
+:: Detect current branch and push to main on HF
+for /f "tokens=*" %%a in ('git rev-parse --abbrev-ref HEAD') do set CURRENT_BRANCH=%%a
+echo Pushing branch !CURRENT_BRANCH! to Hugging Face main...
+git push --force huggingface !CURRENT_BRANCH!:main
 
 echo.
-echo Deployment command finished. Check the output above for errors.
+if %errorlevel% neq 0 (
+    echo [ERROR] Push failed. Please check your token and internet connection.
+) else (
+    echo [SUCCESS] Push complete! Check your Space at:
+    echo https://huggingface.co/spaces/Rahii123/AI_Trip_Planner
+)
+echo.
 pause
