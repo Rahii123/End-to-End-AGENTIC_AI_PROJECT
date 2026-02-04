@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    container_name: trip_planner_backend
+    ports:
+      - "8000:8000"
+    environment:
+      # Pass environment variables from host (or define them here)
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - TAVILY_API_KEY=${TAVILY_API_KEY}
+      - OPENWEATHERMAP_API_KEY=${OPENWEATHERMAP_API_KEY}
+      - FIXER_API_KEY=${FIXER_API_KEY}
+    volumes:
+      # Optional: Mount code for hot-reloading during dev
+      # - .:/app
+      - ./config:/app/config
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+    container_name: trip_planner_frontend
+    ports:
+      - "8501:8501"
+    environment:
+      # Point to the backend service name within the docker network
+      # Changing localhost to 'backend' because inside the container, 'localhost' is itself
+      - BASE_URL=http://backend:8000
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend/assets:/app/frontend/assets
+    restart: unless-stopped

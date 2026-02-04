@@ -93,6 +93,30 @@ streamlit run streamlit_app.py
 ```
 *Access the app at `http://localhost:8501`*
 
+*Access the app at `http://localhost:8501`*
+
+---
+
+## 🐳 Deployment with Docker
+
+The easiest way to run the application in a professional environment is using Docker. This ensures that all dependencies are isolated and the app runs consistently everywhere.
+
+### 1. Build and Run
+Make sure you have Docker Desktop installed, then run:
+
+```bash
+docker-compose up --build
+```
+
+- **Backend** will start on `http://localhost:8000`
+- **Frontend** will start on `http://localhost:8501`
+
+### 2. Stop the App
+To stop the containers, press `Ctrl+C` or run:
+```bash
+docker-compose down
+```
+
 ---
 
 ## 🏗️ Project Structure
