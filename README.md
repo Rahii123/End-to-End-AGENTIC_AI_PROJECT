@@ -1,3 +1,13 @@
+---
+title: Agentic Trip Planner
+emoji: ✈️
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+app_port: 7860
+---
+
 # 🌍 End-to-End Agentic AI Trip Planner
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)

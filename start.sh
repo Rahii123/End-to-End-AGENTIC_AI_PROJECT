@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Start the backend in the background
-# We use nohup to keep it running and redirect output to logs
+# We allow output to stdout/stderr so it shows in HF Space logs
 echo "Starting Backend..."
-nohup uvicorn main:app --host 0.0.0.0 --port 8000 > backend.log 2>&1 &
+uvicorn main:app --host 0.0.0.0 --port 8000 &
 
 # Wait a few seconds for the backend to initialize
 sleep 5
