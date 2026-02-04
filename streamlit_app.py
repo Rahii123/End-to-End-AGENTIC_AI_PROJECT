@@ -63,7 +63,7 @@ with col1:
     with st.form(key="query_form"):
         destination = st.text_input("Destination", placeholder="e.g. Paris, Tokyo, New York")
         days = st.number_input("Duration (Days)", min_value=1, max_value=30, value=5)
-        budget = st.selectbox("Budget Level", ["Budget", "Moderate", "Luxury"])
+        budget = st.selectbox("Budget Level", ["Low", "Moderate", "Luxury"])
         interests = st.text_area("Interests / Preferences", placeholder="e.g. Museums, Food, Hiking")
         
         submit_button = st.form_submit_button("🚀 Plan My Trip")
