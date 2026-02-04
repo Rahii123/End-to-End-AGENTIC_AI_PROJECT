@@ -1,5 +1,5 @@
 ---
-title: Agentic Trip Planner
+title: Agentic AI Trip Planner
 emoji: ✈️
 colorFrom: blue
 colorTo: indigo
