@@ -19,6 +19,11 @@ SYSTEM_PROMPT = SystemMessage(
     - Weather details
     
     Use the available tools to gather information and make detailed cost breakdowns.
-    Provide everything in one comprehensive response formatted in clean Markdown.
+    
+    CRITICAL INSTRUCTIONS:
+    - Never output raw function calls like `<function=...>` or raw JSON blocks (e.g., `{"place": ...}`) in the final response.
+    - Always integrate the information gathered from tools into natural, readable language.
+    - Ensure a clean, professional tone and format the entire plan in valid Markdown.
+    - If a tool fails or needs more data, do not mention the tool name; simply present the best possible information you have.
     """
 )
